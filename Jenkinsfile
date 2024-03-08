@@ -14,4 +14,12 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            echo 'Git Clone Success!!'
+        }
+        failure {
+            echo 'Git Clone Fail'
+        }
+    }
 }
