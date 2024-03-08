@@ -24,7 +24,7 @@ pipeline {
         stage('Maven Build') {
             steps {
                 echo 'Maven Build'
-                sh 'mvn -dmaven.test.failure.ignore=true clean package'
+                sh 'mvn -Dmaven.test.failure.ignore=true clean package'
             }
             post {
                 success {
