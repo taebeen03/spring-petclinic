@@ -70,10 +70,6 @@ pipeline {
                 sh "docker image prune -f --all --filter \"until=lh\""
             }
         }
-        stage('Upload to S3') {
-        }
-        stage('Codedeploy Workload') {
-        }
 
         
     }
