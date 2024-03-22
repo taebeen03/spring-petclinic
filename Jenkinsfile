@@ -75,7 +75,12 @@ pipeline {
             steps {
                 echo 'Upload to S3'
                 dir("${env.WORKSPACE}") {
-                    sh 'zip -r deploy.zip ./deploy appspec.yaml'
+                    // sh 'zip -r deploy.zip ./deploy appspec.yaml'
+                    // appspec.yaml 파일과 배포에 필요한 기타 파일들이 포함된 디렉토리로 가정
+                    sh 'cp appspec.yaml deploy/'
+                    sh 'cp -r build/* deploy/build/'
+                    // deploy 디렉토리 내의 내용을 zip 파일로 압축
+                    sh 'zip -r deploy.zip deploy/'
                     withAWS(region:"${REGION}", credentials:"${AWS_CREDENTIAL_NAME}") {
                         s3Upload(file:"deploy.zip", bucket:"std04-codedeploy-bucket")
                     }
