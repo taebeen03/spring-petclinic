@@ -33,19 +33,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 // 새로운코드
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import org.springframework.ui.Model;
+
+public class NetworkUtils {
+    public static String getServerIpAddress() {
+        try {
+            InetAddress ip = InetAddress.getLocalHost();
+            return ip.getHostAddress();
+        } catch (UnknownHostException e) {
+            return "IP 주소를 가져올 수 없습니다.";
+        }
+    }
+}
 
 @Controller
 public class WelcomeController {
 
     @GetMapping("/")
     public String welcome(Model model) {
-        try {
-            String serverIp = InetAddress.getLocalHost().getHostAddress();
-            model.addAttribute("serverIp", serverIp);
-        } catch (Exception e) {
-            model.addAttribute("serverIp", "IP Address not found");
-        }
-        return "welcome";
+        String serverIp = NetworkUtils.getServerIpAddress();
+        model.addAttribute("serverIp", serverIp);
+        return "welcome"; // 여기서 "welcome"은 메인 페이지의 뷰 이름입니다.
     }
 }
