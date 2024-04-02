@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-
-<html xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
-
-  <body>
-
-    <h2 th:text="#{welcome}">Welcome and Hellow test</h2>
-    <h1>Welcome to Spring Petclinic!</h1>
-    <h2>Server IP: <span th:text="${serverIp}">Server IP</span></h2>
-    <div class="row">
-        <div class="col-md-12">
-          <img class="img-responsive" src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}"/>
-        </div>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+    <div th:replace="fragments/layout :: layout (~{::title}, ~{::body},'home')">
+        <title>Spring Petclinic에 오신 것을 환영합니다</title>
+        <section>
+            <h2 th:text="#{welcome}">Welcome and Hello test</h2>
+            <h1>Spring Petclinic에 오신 것을 환영합니다!</h1>
+            <h2>서버 IP: <span th:text="${serverIp}">Server IP</span></h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="img-responsive" src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}"/>
+                </div>
+            </div>
+        </section>
     </div>
-
-  </body>
-
+</body>
 </html>
