@@ -4,8 +4,9 @@
 
   <body>
 
-//    <h2 th:text="#{welcome}">Welcome and Hellow test</h2>
-    <h2>Welcome to the <span th:text="${serverUrl}">[Server URL]</span></h2>
+    <h2 th:text="#{welcome}">Welcome and Hellow test</h2>
+    <h1>Welcome to Spring Petclinic!</h1>
+    <h2>Server IP: <span th:text="${serverIp}">Server IP</span></h2>
     <div class="row">
         <div class="col-md-12">
           <img class="img-responsive" src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}"/>
