@@ -19,12 +19,29 @@ package org.springframework.samples.petclinic.system;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+// 기존코드
+//@Controller
+//class WelcomeController {
+//
+//	@GetMapping("/")
+//	public String welcome() {
+//		return "welcome";
+//	}
+
+//}
+
+
+// 새로운코드
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 class WelcomeController {
 
-	@GetMapping("/")
-	public String welcome() {
-		return "welcome";
-	}
+    @GetMapping("/")
+    public String welcome(HttpServletRequest request, Model model) {
+        String serverUrl = request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath());
+        model.addAttribute("serverUrl", serverUrl);
+        return "welcome";
+    }
 
 }
