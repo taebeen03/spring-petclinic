@@ -36,24 +36,22 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import org.springframework.ui.Model;
 
-public class NetworkUtils {
-    public static String getServerIpAddress() {
+@Controller
+public class WelcomeController {
+
+    @GetMapping("/")
+    public String welcome(Model model) {
+        String serverIp = getServerIpAddress(); // 서버 IP 주소를 얻는 메소드를 직접 호출
+        model.addAttribute("serverIp", serverIp);
+        return "welcome"; // "welcome"은 메인 페이지의 뷰 이름
+    }
+
+    private String getServerIpAddress() {
         try {
             InetAddress ip = InetAddress.getLocalHost();
             return ip.getHostAddress();
         } catch (UnknownHostException e) {
             return "IP 주소를 가져올 수 없습니다.";
         }
-    }
-}
-
-@Controller
-public class WelcomeController {
-
-    @GetMapping("/")
-    public String welcome(Model model) {
-        String serverIp = NetworkUtils.getServerIpAddress();
-        model.addAttribute("serverIp", serverIp);
-        return "welcome"; // 여기서 "welcome"은 메인 페이지의 뷰 이름입니다.
     }
 }
