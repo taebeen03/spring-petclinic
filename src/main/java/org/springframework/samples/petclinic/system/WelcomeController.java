@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 // 새로운코드
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.ui.Model;
 
 @Controller
 class WelcomeController {
