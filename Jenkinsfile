@@ -44,7 +44,12 @@ pipeline {
                 // 테스트 실패를 무시하는 대신에 포매팅을 수정한 후 정상적으로 빌드를 수행합니다.
                 sh 'mvn clean package'
             }
-            post가
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
+            }
+        }
         
         //stage('Maven Build') {
         //    steps {
