@@ -4,7 +4,7 @@ pipeline {
         jdk "jdk17"
         maven "M3"
     }
-//트리거 테스트    
+    
     environment {
         AWS_CREDENTIAL_NAME = "AWSCredentials"
         REGION = "ap-northeast-2"
