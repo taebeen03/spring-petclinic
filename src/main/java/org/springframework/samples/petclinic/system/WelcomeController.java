@@ -32,17 +32,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 // 새로운코드
-import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
 import org.springframework.ui.Model;
 
 @Controller
-class WelcomeController {
+public class WelcomeController {
 
     @GetMapping("/")
-    public String welcome(HttpServletRequest request, Model model) {
-        String serverUrl = request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath());
-        model.addAttribute("serverUrl", serverUrl);
+    public String welcome(Model model) {
+        try {
+            String serverIp = InetAddress.getLocalHost().getHostAddress();
+            model.addAttribute("serverIp", serverIp);
+        } catch (Exception e) {
+            model.addAttribute("serverIp", "IP Address not found");
+        }
         return "welcome";
     }
-
 }
