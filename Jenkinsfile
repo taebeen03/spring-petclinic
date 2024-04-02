@@ -29,17 +29,34 @@ pipeline {
                 }
             }
         }
+        // 여기부터 새로 추가
+        stage('Format Code') {
+            steps {
+                echo 'Formatting Code'
+                // 포매팅 위반을 자동으로 수정합니다.
+                sh 'mvn spring-javaformat:apply'
+            }
+        }
+
         stage('Maven Build') {
             steps {
                 echo 'Maven Build'
-                sh 'mvn -Dmaven.test.failure.ignore=true clean package'
+                // 테스트 실패를 무시하는 대신에 포매팅을 수정한 후 정상적으로 빌드를 수행합니다.
+                sh 'mvn clean package'
             }
-            post {
-                success {
-                    junit 'target/surefire-reports/**/*.xml'
-                }
-            }
-        }
+            post가
+        
+        //stage('Maven Build') {
+        //    steps {
+        //        echo 'Maven Build'
+        //        sh 'mvn -Dmaven.test.failure.ignore=true clean package'
+        //    }
+        //    post {
+        //        success {
+        //            junit 'target/surefire-reports/**/*.xml'
+        //        }
+        //    }
+        //}
 
         stage ('Docker Image Build') {
             steps {
